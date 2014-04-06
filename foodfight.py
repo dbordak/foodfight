@@ -59,7 +59,7 @@ def main():
     zip = raw_input()
     print "What is your quest?"
     raw_input()
-    api.delivery_list("ASAP",street,city,zip)
+    print api.delivery_list("ASAP",street,city,zip)
 
 
 
