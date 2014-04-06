@@ -59,31 +59,29 @@ def main():
     zip = raw_input()
     print "What is your quest?"
     raw_input()
-    print api.delivery_list("ASAP",street,city,zip)
-
-
-
+    list = api.delivery_list("ASAP",street,city,zip)
+    print "Restaurants Available:"
+    num = 0
+    for restaurant in list:
+        print str(num) + " " + restaurant['na']
+        num+=1
+    print ""
+    print "What is your selection? "
+    choice = raw_input()
+    print "You chose " + list[int(choice)]['na']
+    menu = api.restaurant_details(str(list[int(choice)]['id']))['menu']
+    print "Items on the menu:"
+    num2 = 0
+    for category in menu:
+        for item in category['children']:
+            print str(num2) + " " + item['name']
+            num2+=1
+    print "Player 1, what is your choice?"
+    item1 = raw_input()
+    print "Player 2, what is your choice?"
+    item2 = raw_input()
+    print "So be it. Let the games begin!"
 
 
 if __name__ == "__main__":
     main()
-
-#First, get address.
-
-#Next, find restaurants in area.
-
-#Next, pick restaurant
-
-#Next, list items
-
-#Next, pick items for first person
-
-#Then second person
-
-#Now add first person's info
-
-#Now add second person's info
-
-#Now trigger game
-
-#Now call order
