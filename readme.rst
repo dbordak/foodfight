@@ -18,5 +18,9 @@ Note
 ----
 
 FoodFight requires a Ordr.in Secret Key to be in the envar ORDRIN_API_KEY.
+Additionally, Ordr.in's python api library is currently broken in ``pip``.
+You need to use the submodule, along with its dependencies (``requests`` and
+``jsonschema``).
+
 Also, it doesn't actually order any food, since it's running on test servers,
 but it's really the thought that counts.
