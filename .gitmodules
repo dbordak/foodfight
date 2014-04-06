@@ -1,3 +1,3 @@
 [submodule "api-py"]
-	path = api-py
+	path = pyordrin
 	url = https://github.com/ordrin/api-py.git
