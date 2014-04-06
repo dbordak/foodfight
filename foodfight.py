@@ -74,7 +74,7 @@ def main():
     num1 = 0
     for category in menu:
         num2=0
-        print "Category "+str(num2)+": "+category['name']
+        print "Category "+str(num1)+": "+category['name']
         for item in category['children']:
             print str(num1)+":"+str(num2) + " " + item['name']
             num2+=1
