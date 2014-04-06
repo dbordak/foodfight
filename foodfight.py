@@ -1,6 +1,8 @@
 #!/bin/python2
 
 import subprocess
+import sys
+sys.path.append("pyordrin")
 import ordrin
 
 GAME = "dummy"
