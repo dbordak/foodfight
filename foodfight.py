@@ -7,8 +7,6 @@ import sys
 sys.path.append("pyordrin")
 import ordrin
 
-GAME = os.path.relpath("games/game.py")
-
 key = os.environ.get('ORDRIN_API_KEY',"nope")
 if key == "nope":
     print "API key not found!"
@@ -37,6 +35,10 @@ def getAccount(playerNo):
     return email,pw
 
 def main():
+    if len(sys.argv) < 2:
+        print "Incorrect number of args."
+        exit(1)
+    game = os.path.relpath(sys.argv[1])
     print "Note: If applicable, the resident of your current location"
     print "should be player 1."
     #print "Does player 1 have an account? [Y/n]"
@@ -87,9 +89,14 @@ def main():
     #print "Player 2, what is your choice?"
     #tray_string2 = raw_input()
     print "So be it. Let the games begin!"
-    winner = subprocess.call(GAME)
+    winner = subprocess.call(game)
     if winner == 2:
         print "We're going to do order 1 using user 2"
+        order = list()
+        items = tray_string1.split(",")
+        for item in items:
+            nums = item.split(":")
+            menu[nums[0]]['children'][nums[1]]['id']
     elif winner == 3:
         print "We're going to do order 2 using user 1"
     else:
