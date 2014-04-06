@@ -5,7 +5,7 @@ import ordrin
 
 GAME = "dummy"
 
-api = ordrin.APIs("G2emJ1PT6VbytwD9guV3mvEWEvV9TBd4r_Uh6PAm78E",ordrin.TEST)
+api = ordrin.APIs("G2emJ1PT6VbytwD9guV3mvEWEvV9TBd4r_Uh6PAm78E")
 
 def main():
     print "Do both of you have accounts? [Y/n]"
