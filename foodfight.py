@@ -87,9 +87,16 @@ def main():
     #print "Player 2, what is your choice?"
     #tray_string2 = raw_input()
     print "So be it. Let the games begin!"
-    subprocess.call(GAME)
-
-
+    winner = subprocess.call(GAME)
+    if winner == 2:
+        print "We're going to do order 1 using user 2"
+    elif winner == 3:
+        print "We're going to do order 2 using user 1"
+    else:
+        print winner
+        print "There was a problem with the game. Please try again later."
+        exit(1)
+    print "Thank you for using foodfight!"
 
 if __name__ == "__main__":
     main()
