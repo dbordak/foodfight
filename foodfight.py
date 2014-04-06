@@ -10,12 +10,20 @@ GAME = "dummy"
 api = ordrin.APIs("G2emJ1PT6VbytwD9guV3mvEWEvV9TBd4r_Uh6PAm78E")
 
 def main():
-    print "Do both of you have accounts? [Y/n]"
+    print "Does player 1 have an account? [Y/n]"
     ans = raw_input().lower()
     if ans == "n" or ans == "no":
-        print "Does player 1 have an account? [y/N]"
-        ans = raw_input().lower()
-        #if not(ans == "y" or ans == "yes"):
+        player1 = createAccount()
+    else:
+        print "What is player 1's username?"
+    print "Does player 2 have an account? [Y/n]"
+    ans = raw_input().lower()
+    if ans == "n" or ans == "no":
+        player2 = createAccount()
+    else:
+        print "What is player 2's username?"
+
+
 
 
 if __name__ == "__main__":
