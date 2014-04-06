@@ -37,6 +37,7 @@ def getAccount(playerNo):
     return email,pw
 
 def makeOrder(rid,menu,address,winner,loser,tray_string):
+    print "Player "+winner+" isn't going hungry tonight!"
     order = ""
     order_n = ""
     items = tray_string.split(",")
