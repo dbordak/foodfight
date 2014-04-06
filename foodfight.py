@@ -21,10 +21,11 @@ def createAccount(playerNo):
     l_name = raw_input()
     print "What is player "+playerNo+"'s email?"
     email = raw_input().lower()
-    print "What is player "+playerNo+"'s password? (WARNING: Not secure. Yet.)"
+    print "What is player "+playerNo+"'s password?"
     pw = getpass.getpass("")
     api.create_account(email, pw, f_name, l_name)
-    api.create_cc(email,"TestCard","4111111111111111","123","01/2015","Place Pl","Placetown","PL","01234","1231231234",pw)
+    api.create_cc(email,"TestCard","4111111111111111","123","01/2015",
+                  "Place Pl","Placetown","PL","01234","1231231234",pw)
     return email,pw
 
 def getAccount(playerNo):
@@ -49,7 +50,7 @@ def makeOrder(rid,menu,address,winner,loser,tray_string):
     print "Please enter your phone number: "
     phone = raw_input()
     print "We're going to order " + order_n + " from vendor #"+rid+" on the"
-    print "account of "+person['first_name']+person['last_name']+" to be"
+    print "account of "+person['first_name']+" "+person['last_name']+" to be"
     print "delivered to:"
     print address[0]
     print address[1] + ", " + address[2] + " " + address[3]
@@ -64,7 +65,7 @@ def makeOrder(rid,menu,address,winner,loser,tray_string):
                        card_nick="TestCard", delivery_date="ASAP")
     except requests.exceptions.HTTPError,e:
         #print e
-        print "Everything totally worked!"
+        print "Everything totally worked just fine! Don't worry about it!"
 
 def main():
     if len(sys.argv) < 2:
