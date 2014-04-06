@@ -7,7 +7,7 @@ import sys
 sys.path.append("pyordrin")
 import ordrin
 
-GAME = "dummy"
+GAME = os.path.relpath("games/game.py")
 
 key = os.environ.get('ORDRIN_API_KEY',"nope")
 if key == "nope":
@@ -51,39 +51,44 @@ def main():
     #    player2 = createAccount("2")
     #else:
     #    player2 = getAccount("2")
-    print "What address are you at?"
-    street = raw_input()
-    print "What city are you in?"
-    city = raw_input()
-    print "What is your Zip Code?"
-    zip = raw_input()
-    print "What is your quest?"
-    raw_input()
-    list = api.delivery_list("ASAP",street,city,zip)
-    print "Restaurants Available:"
-    num = 0
-    for restaurant in list:
-        print str(num) + " " + restaurant['na']
-        num+=1
-    print ""
-    print "What is your selection? "
-    choice = raw_input()
-    print "You chose " + list[int(choice)]['na']
-    menu = api.restaurant_details(str(list[int(choice)]['id']))['menu']
-    print "Items on the menu:"
-    num1 = 0
-    for category in menu:
-        num2=0
-        print "Category "+str(num1)+": "+category['name']
-        for item in category['children']:
-            print str(num1)+":"+str(num2) + " " + item['name']
-            num2+=1
-        num1+=1
-    print "Player 1, what is your choice?"
-    item1 = raw_input()
-    print "Player 2, what is your choice?"
-    item2 = raw_input()
+    #print "What address are you at?"
+    #street = raw_input()
+    #print "What city are you in?"
+    #city = raw_input()
+    #print "What is your Zip Code?"
+    #zip = raw_input()
+    #print "What is your quest?"
+    #raw_input()
+    #list = api.delivery_list("ASAP",street,city,zip)
+    #print "Restaurants Available:"
+    #num = 0
+    #for restaurant in list:
+    #    print str(num) + " " + restaurant['na']
+    #    num+=1
+    #print ""
+    #print "What is your selection? "
+    #choice = raw_input()
+    #print "You chose " + list[int(choice)]['na']
+    #menu = api.restaurant_details(str(list[int(choice)]['id']))['menu']
+    #print "Items on the menu:"
+    #num1 = 0
+    #for category in menu:
+    #    num2=0
+    #    print "Category "+str(num1)+": "+category['name']
+    #    for item in category['children']:
+    #        print str(num1)+":"+str(num2) + " " + item['name'] + ": $" + item['price']
+    #        num2+=1
+    #    num1+=1
+    #print ""
+    #print "To order multiple items, separate each with a comma (e.g. 0:2,1:3)"
+    #print ""
+    #print "Player 1, what is your choice?"
+    #tray_string1 = raw_input()
+    #print "Player 2, what is your choice?"
+    #tray_string2 = raw_input()
     print "So be it. Let the games begin!"
+    subprocess.call(GAME)
+
 
 
 if __name__ == "__main__":
