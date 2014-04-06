@@ -13,6 +13,8 @@ def main():
     print "Do both of you have accounts? [Y/n]"
     ans = raw_input()
 
+if __name__ == "__main__":
+    main()
 
 #First, get address.
 
