@@ -71,11 +71,14 @@ def main():
     print "You chose " + list[int(choice)]['na']
     menu = api.restaurant_details(str(list[int(choice)]['id']))['menu']
     print "Items on the menu:"
-    num2 = 0
+    num1 = 0
     for category in menu:
+        num2=0
+        print "Category "+str(num2)+": "+category['name']
         for item in category['children']:
-            print str(num2) + " " + item['name']
+            print str(num1)+":"+str(num2) + " " + item['name']
             num2+=1
+        num1+=1
     print "Player 1, what is your choice?"
     item1 = raw_input()
     print "Player 2, what is your choice?"
