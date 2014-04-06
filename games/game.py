@@ -27,5 +27,8 @@ while(ans1==ans2):
 
 if(ans1==0 or ans1<ans2):
     print ("player 1 is the winner")
+    exit(2)
 elif(ans2==0 or ans1>ans2):
     print ("player 2 is the winner")
+    exit(3)
+
