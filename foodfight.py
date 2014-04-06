@@ -1,5 +1,6 @@
 #!/bin/python2
 
+import os
 import subprocess
 import getpass
 import sys
@@ -7,8 +8,6 @@ sys.path.append("pyordrin")
 import ordrin
 
 GAME = "dummy"
-
-api = ordrin.APIs("G2emJ1PT6VbytwD9guV3mvEWEvV9TBd4r_Uh6PAm78E")
 
 def createAccount(playerNo):
     print "What is player "+playerNo+"'s first name?"
@@ -19,10 +18,15 @@ def createAccount(playerNo):
     email = raw_input().lower()
     print "What is player "+playerNo+"'s password? (WARNING: Not secure. Yet.)"
     pw = getpass.getpass("")
-    ordrin.create_account(email, pw, f_name, l_name)
+    api.create_account(email, pw, f_name, l_name)
 
 
 def main():
+    key = os.environ.get('ORDRIN_API_KEY',"nope")
+    if key == "nope":
+        print "API key not found!"
+        return 1
+    api = ordrin.APIs(key)
     print "Note: If applicable, the resident of your current location"
     print "should be player 1."
     print "Does player 1 have an account? [Y/n]"
@@ -30,7 +34,11 @@ def main():
     if ans == "n" or ans == "no":
         player1 = createAccount("1")
     else:
-        print "What is player 1's username?"
+        print "What is player 1's email?"
+        email = raw_input().lower()
+        print "What is player 1's password?"
+        pw = getpass.getpass("")
+        api.get_account_info(email,pw)
     print "Does player 2 have an account? [Y/n]"
     ans = raw_input().lower()
     if ans == "n" or ans == "no":
