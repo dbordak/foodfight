@@ -1,0 +1,25 @@
+import subprocess
+import ordrin
+
+api = ordrin.APIs("G2emJ1PT6VbytwD9guV3mvEWEvV9TBd4r_Uh6PAm78E",ordrin.TEST)
+
+
+#First, get address.
+
+#Next, find restaurants in area.
+
+#Next, pick restaurant
+
+#Next, list items
+
+#Next, pick items for first person
+
+#Then second person
+
+#Now add first person's info
+
+#Now add second person's info
+
+#Now trigger game
+
+#Now call order
