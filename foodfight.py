@@ -1,5 +1,6 @@
 #!/bin/python2
 
+import requests
 import os
 import subprocess
 import getpass
@@ -34,17 +35,36 @@ def getAccount(playerNo):
     print api.get_account_info(email,pw)
     return email,pw
 
-def makeOrder(menu,winner,loser,tray_string):
-    if winner == 1:
-        print "We're going to do order 1 using user 2"
-    else:
-        print "We're going to do order 2 using user 1"
-    order = list()
+def makeOrder(rid,menu,address,winner,loser,tray_string):
+    order = ""
+    order_n = ""
     items = tray_string.split(",")
     for item in items:
         nums = item.split(":")
-        items.append(menu[nums[0]]['children'][nums[1]]['id'])
-
+        order += menu[int(nums[0])]['children'][int(nums[1])]['id'] + "/1+"
+        order_n += menu[int(nums[0])]['children'][int(nums[1])]['name'] + ", "
+    order = order.strip("+")
+    order_n = order_n.strip(" ,")
+    person = api.get_account_info(loser[0],loser[1])
+    print "Please enter your phone number: "
+    phone = raw_input()
+    print "We're going to order " + order_n + " from vendor #"+rid+" on the"
+    print "account of "+person['first_name']+person['last_name']+" to be"
+    print "delivered to:"
+    print address[0]
+    print address[1] + ", " + address[2] + " " + address[3]
+    print "em: " + person['em']
+    # Looks like this won't work with dummy CCs?
+    try:
+        api.order_user(rid=rid, tray=order, tip="0.00",
+                       first_name=person['first_name'],
+                       last_name=person['last_name'], email=person['em'],
+                       current_password=loser[1], addr=address[0], city=address[1],
+                       phone=phone, state=address[2], zip=address[3],
+                       card_nick="TestCard", delivery_date="ASAP")
+    except requests.exceptions.HTTPError,e:
+        #print e
+        print "Everything totally worked!"
 
 def main():
     if len(sys.argv) < 2:
@@ -69,8 +89,11 @@ def main():
     street = raw_input()
     print "What city are you in?"
     city = raw_input()
+    print "What state are you in? (two-letter abbrev.)"
+    state = raw_input().upper()
     print "What is your Zip Code?"
     zip = raw_input()
+    address = (street,city,state,zip)
     print "What is your quest?"
     raw_input()
     list = api.delivery_list("ASAP",street,city,zip)
@@ -83,7 +106,8 @@ def main():
     print "What is your selection? "
     choice = raw_input()
     print "You chose " + list[int(choice)]['na']
-    menu = api.restaurant_details(str(list[int(choice)]['id']))['menu']
+    rid = str(list[int(choice)]['id'])
+    menu = api.restaurant_details(rid)['menu']
     print "Items on the menu:"
     num1 = 0
     for category in menu:
@@ -103,9 +127,9 @@ def main():
     print "So be it. Let the games begin!"
     winner = subprocess.call(game)
     if winner == 2:
-        makeOrder(menu,1,user2,tray_string1)
+        makeOrder(rid,menu,address,1,player2,tray_string1)
     elif winner == 3:
-        makeOrder(menu,2,user1,tray_string2)
+        makeOrder(rid,menu,address,2,player1,tray_string2)
     else:
         print winner
         print "There was a problem with the game. Please try again later."

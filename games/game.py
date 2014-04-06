@@ -12,6 +12,7 @@ answer = (guess1+guess2)*8 %10
 
 ans1=abs(answer-guess1)
 ans2=abs(answer-guess2)
+print "The number was "+str(answer)
 
 while(ans1==ans2):
     print "There is a tie, please try again"
@@ -24,6 +25,7 @@ while(ans1==ans2):
 
     ans1=abs(answer-guess1)
     ans2=abs(answer-guess2)
+    print "The number was "+answer
 
 if(ans1==0 or ans1<ans2):
     print ("player 1 is the winner")
@@ -31,4 +33,3 @@ if(ans1==0 or ans1<ans2):
 elif(ans2==0 or ans1>ans2):
     print ("player 2 is the winner")
     exit(3)
-
